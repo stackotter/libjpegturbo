@@ -18,7 +18,7 @@
 #define JPEG_LIB_VERSION  62
 
 /* libjpeg-turbo version */
-#define LIBJPEG_TURBO_VERSION  3.2.2
+#define LIBJPEG_TURBO_VERSION  "3.2.2"
 
 /* libjpeg-turbo version in integer form */
 #define LIBJPEG_TURBO_VERSION_NUMBER  3002002
