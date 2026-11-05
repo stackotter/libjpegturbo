@@ -1,0 +1,5 @@
+module turbojpeg {
+  header "turbojpeg.h"
+
+  export *
+}

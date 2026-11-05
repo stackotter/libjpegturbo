@@ -1,0 +1,6 @@
+module jpeg {
+  header "jpeglib.h"
+  header "jerror.h"
+
+  export *
+}
