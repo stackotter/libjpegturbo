@@ -9,13 +9,13 @@ The libjpeg-turbo sources are tracked as a git submodule in `libjpeg-turbo/`.
 
 ## Products
 
-| Product | Module | Description |
-| --- | --- | --- |
-| `libjpegturbo` / `jpeg` | `jpeg` | The classic libjpeg C API (`jpeglib.h`, `jerror.h`). |
-| `turbojpeg` | `turbojpeg` | The TurboJPEG C API (`turbojpeg.h`). |
+- `JPEGTurbo`: A Swift target that re-exports both `jpeg` and `turbojpeg`. Use this unless you have a good reason.
+- `jpeg`: The classic libjpeg C API.
+- `turbojpeg`: The TurboJPEG C API.
 
-`turbojpeg` links against the `jpeg` target, so both APIs can be used from the
-same executable.
+`turbojpeg` links to `jpeg`.
+
+`JPEGTurbo` may house some thin Swift bindings eventually, but for now it just re-exports the `jpeg` and `turbojpeg` C modules.
 
 ## Usage
 
@@ -47,11 +47,7 @@ import turbojpeg
 The configuration headers that libjpeg-turbo's CMake build normally generates
 (`jconfig.h`, `jconfigint.h`, `jversion.h`, and the Arm `neon-compat.h`) are
 checked into `Sources/jpeg/include/`, because SwiftPM does not run CMake before
-compiling a C target. They use compiler predefined macros so that the package
-works across Apple and non-Apple platforms.
-
-All three data precisions supported by libjpeg-turbo (8-, 12-, and 16-bit) are
-built.
+compiling a C target.
 
 ### SIMD
 

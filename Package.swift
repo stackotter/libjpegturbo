@@ -10,8 +10,8 @@ let package = Package(
   name: "libjpegturbo",
   products: [
     .library(
-      name: "libjpegturbo",
-      targets: ["jpeg", "turbojpeg"]
+      name: "JPEGTurbo",
+      targets: ["JPEGTurbo"]
     ),
     .library(
       name: "jpeg",
@@ -23,6 +23,13 @@ let package = Package(
     ),
   ],
   targets: [
+    .target(
+      name: "JPEGTurbo",
+      dependencies: [
+        "jpeg",
+        "turbojpeg",
+      ]
+    ),
     // The 64-bit Arm Neon implementation of libjpeg-turbo's SIMD extensions.
     // The wrapper sources in Sources/jpegsimd are empty on other
     // architectures, where the scalar C implementation is used instead.
