@@ -69,7 +69,9 @@ zlib sources to support PNG, matching libjpeg-turbo's own CMake build.
 
 1. Update the `libjpeg-turbo` submodule.
 2. Update the version macros and build number in
-   `Sources/jpeg/include/jconfig.h` and `Sources/jpeg/include/jconfigint.h`.
+   `Sources/jpeg/include/jconfig.h` and `Sources/jpeg/include/jconfigint.h`. If
+   you end up entirely regenerating the config files, remember to wrap the value
+   of `LIBJPEG_TURBO_VERSION` in double quotes to avoid #1.
 3. If the source lists in libjpeg-turbo's `CMakeLists.txt` changed, update the
    `sources` lists in `Package.swift`.
 4. Run `swift test`.

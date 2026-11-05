@@ -2,6 +2,11 @@ import jpeg
 import XCTest
 
 final class JPEGTests: XCTestCase {
+  func testVersionMacroIsSwiftFriendly() throws {
+    let version: String = LIBJPEG_TURBO_VERSION
+    XCTAssertEqual(version, "3.2.2")
+  }
+
   func testCanCreateAndDestroyDecompressor() throws {
     var errorManager = jpeg_error_mgr()
     var cinfo = jpeg_decompress_struct()
@@ -34,7 +39,7 @@ final class JPEGTests: XCTestCase {
     }
 
     var jpegBuffer: UnsafeMutablePointer<UInt8>?
-    var jpegSize: UInt = 0
+    var jpegSize: CUnsignedLong = 0
 
     var compressErrorManager = jpeg_error_mgr()
     var compressor = jpeg_compress_struct()
