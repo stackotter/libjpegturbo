@@ -16,14 +16,16 @@
 /* libjpeg-turbo build number */
 #define BUILD  "swiftpm"
 
-/* How to hide global symbols. */
-#if defined(_MSC_VER)
+/* How to hide global symbols.
+ *
+ * libjpeg-turbo normally marks its internal SIMD entry points hidden. SwiftPM
+ * and Xcode build each C target as a separate relocatable object, though, and
+ * Xcode converts hidden/private-external symbols into non-external symbols in
+ * those objects. The libjpeg target then cannot resolve its references to the
+ * SIMD target's jsimd_* symbols when linking an app or test bundle. Since
+ * SwiftPM builds static libraries here, leaving these symbols visible is safe.
+ */
 #define HIDDEN
-#elif defined(__GNUC__) || defined(__clang__)
-#define HIDDEN  __attribute__((visibility("hidden")))
-#else
-#define HIDDEN
-#endif
 
 /* Compiler's inline keyword */
 #undef inline
