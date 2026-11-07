@@ -23,11 +23,25 @@ let package = Package(
     ),
   ],
   targets: [
+    // A combined C module exposing both libjpeg and TurboJPEG.  Swift 6.1's
+    // symbol graph generation crashes when a Swift module re-exports two
+    // separate Clang modules, so the convenience `JPEGTurbo` module re-exports
+    // this single combined module instead.
     .target(
-      name: "JPEGTurbo",
+      name: "JPEGTurboC",
       dependencies: [
         "jpeg",
         "turbojpeg",
+      ],
+      publicHeadersPath: "include",
+      cSettings: [
+        .headerSearchPath("../../Sources/jpeg/include")
+      ]
+    ),
+    .target(
+      name: "JPEGTurbo",
+      dependencies: [
+        "JPEGTurboC"
       ]
     ),
     // The 64-bit Arm Neon implementation of libjpeg-turbo's SIMD extensions.
@@ -219,6 +233,7 @@ let package = Package(
       dependencies: [
         .target(name: "jpeg"),
         .target(name: "turbojpeg"),
+        .target(name: "JPEGTurbo"),
       ]
     ),
   ]
