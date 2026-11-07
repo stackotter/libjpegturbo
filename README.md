@@ -9,13 +9,17 @@ The libjpeg-turbo sources are tracked as a git submodule in `libjpeg-turbo/`.
 
 ## Products
 
-- `JPEGTurbo`: A Swift target that re-exports both `jpeg` and `turbojpeg`. Use this unless you have a good reason.
+- `JPEGTurbo`: A Swift target that re-exports both the `jpeg` and `turbojpeg` APIs through a single combined Clang module. Use this unless you have a good reason.
 - `jpeg`: The classic libjpeg C API.
 - `turbojpeg`: The TurboJPEG C API.
 
 `turbojpeg` links to `jpeg`.
 
-`JPEGTurbo` may house some thin Swift bindings eventually, but for now it just re-exports the `jpeg` and `turbojpeg` C modules.
+`JPEGTurbo` may house some thin Swift bindings eventually. For now it
+re-exports `JPEGTurboC`, a combined Clang module containing both public C APIs.
+Using one combined Clang module avoids a Swift 6.1 compiler bug where emitting
+symbol graphs for a Swift module that re-exports two separate Clang modules can
+crash with `there should be no duplicate decls`.
 
 ## Usage
 

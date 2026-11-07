@@ -1,0 +1,7 @@
+module JPEGTurboC {
+  header "jpeglib.h"
+  header "jerror.h"
+  header "turbojpeg.h"
+
+  export *
+}
